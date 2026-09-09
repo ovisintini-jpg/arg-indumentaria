@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   ARG INDUMENTARIA — sistema de diseño
+   Editorial blanco y negro: papel, tinta y un acento cálido.
+   La foto de producto es la protagonista; la interfaz no compite.
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Fondos — papel cálido, no blanco de pantalla.
+     El blanco puro (#FFF) sobre un monitor moderno vibra y cansa; un punto
+     de amarillo lo apoya y hace que la ropa se vea como en una vidriera. */
+  --color-ink:      #FFFFFF;   /* fondo base de la página          */
+  --color-panel:    #FAF9F7;   /* superficie de tarjeta / módulo   */
+  --color-raise:    #F1EFEB;   /* hover y superficie levantada     */
+  --color-line:     #E4E1DB;   /* filete de grilla y borde suave   */
+  --color-linehi:   #BEB9AF;   /* borde marcado / foco de tarjeta  */
+
+  /* Tinta — la jerarquía la hacen el TAMAÑO y el PESO, no el gris.
+     Contraste medido sobre el fondo (#FFFFFF), norma WCAG:
+       chalk #14120F → 17,6:1  ✔  texto y títulos
+       mute  #57534C →  7,7:1  ✔  bajadas y descripciones
+       dim   #78726A →  4,9:1  ✔  metadatos, mínimo legal para texto chico
+     Ninguno baja de 4,5:1: no hay gris decorativo que no se pueda leer. */
+  --color-chalk:    #14120F;
+  --color-mute:     #57534C;
+  --color-dim:      #78726A;
+
+  /* Acento — terracota apagada. Aparece poco y siempre por algo:
+     el link activo, el dato de la cuenta, el botón secundario de campaña.
+     5,7:1 sobre blanco, así que también sirve como texto. */
+  --color-acento:   #9A4520;
+  --color-acentohi: #B85628;
+  --color-acentodp: #6B2E13;
+
+  /* Semánticos — separados del acento de marca */
+  --color-ok:       #1E7A4D;
+  --color-warn:     #9A6B0C;
+  --color-sale:     #C1272D;   /* el rojo de OFERTA, como en toda tienda */
+
+  /* Tipografía
+     display → Archivo: grotesca de titular, ancha y con negras reales.
+     sans    → Inter: la lectura larga y toda la interfaz.
+     cond    → Barlow Condensed: rótulos, botones y talles en mayúscula.
+     mono    → IBM Plex Mono: SKU, números de pedido y precios tabulados. */
+  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-sans:    var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-cond:    var(--font-barlow-cond), "Arial Narrow", sans-serif;
+  --font-mono:    var(--font-plex-mono), ui-monospace, monospace;
+}
+
+/* ── Base ────────────────────────────────────────────────────── */
+
+:root {
+  --oro: #B8860B;   /* estrellas de reseñas — ver Resenas.tsx */
+}
+
+html {
+  /* Junto con el del body: los paneles que viven fuera de pantalla (el
+     carrito, el cajón de filtros) miden ancho aunque estén escondidos, y sin
+     esto la página se podía correr de costado en el celular. */
+  overflow-x: hidden;
+  background: var(--color-ink);
+  /* Le avisa al sistema operativo que la página es clara, así los controles
+     que dibuja él (listas de select, scrollbars, calendarios) vienen en
+     claro y no en oscuro. */
+  color-scheme: light;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--color-ink);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-chalk);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-chalk);
+  outline-offset: 3px;
+}
+
+/* ── Marcas de la casa ───────────────────────────────────────────
+   En la versión anterior (autopartes) la firma era una barra a rayas
+   azul y blanca. Acá la firma es la línea de tinta: un filete fino y
+   negro que ordena la página como el borde de una página impresa. */
+.ag-rail {
+  height: 2px;
+  width: 100%;
+  background: var(--color-chalk);
+}
+
+.ag-tick {
+  display: flex;
+  gap: 3px;
+  width: 30px;
+  height: 2px;
+}
+.ag-tick i { flex: 1; background: var(--color-chalk); }
+.ag-tick i:nth-child(2) { flex: 2; }
+.ag-tick i:nth-child(3) { background: var(--color-acento); }
+
+/* Bastón del isotipo — mismas barras, inclinadas */
+.ag-slash {
+  display: inline-flex;
+  gap: 2px;
+  transform: skewX(-14deg);
+}
+.ag-slash i { flex: 1; background: var(--color-chalk); }
+.ag-slash i:nth-child(3) { background: var(--color-acento); }
+
+/* ── Legibilidad ─────────────────────────────────────────────────
+   `font-light` se usa en ~90 lugares del proyecto. Sobre papel claro el
+   peso 300 sí funciona, pero abajo de 1 rem se afina de más. Se deja en
+   400 y la clase se conserva para no tocar 90 archivos. */
+.font-light { font-weight: 400; }
+
+/* Los títulos grandes. Sin sombras ni halos: sobre blanco, el contraste
+   ya está. Lo único que se cuida es que la negra no se cierre. */
+.ag-title {
+  color: var(--color-chalk);
+  letter-spacing: -0.035em;
+}
+
+/* Título sobre foto (hero, bandas). La foto puede ser clara u oscura, así
+   que el texto va blanco con una sombra apenas perceptible que lo despega
+   sin ensuciar la imagen. */
+.ag-title-foto {
+  color: #ffffff;
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.42), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Etiquetas utilitarias ───────────────────────────────────── */
+.ag-eyebrow {
+  font-family: var(--font-cond);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+
+.ag-label {
+  font-family: var(--font-cond);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+.ag-mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ag-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Botones ─────────────────────────────────────────────────────
+   El primario es negro sólido: es lo que hace toda tienda de indumentaria
+   seria y es lo que más se aprieta. El fantasma es el mismo botón sin
+   relleno. El de acento se reserva para campañas y ofertas. */
+.ag-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 30px;
+  font-family: var(--font-cond);
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
+}
+.ag-btn-solid { background: var(--color-chalk); color: #fff; }
+.ag-btn-solid:hover { background: #000; transform: translateY(-2px); }
+.ag-btn-ghost { border-color: var(--color-chalk); color: var(--color-chalk); }
+.ag-btn-ghost:hover { background: var(--color-chalk); color: #fff; transform: translateY(-2px); }
+.ag-btn-acento { background: var(--color-acento); color: #fff; }
+.ag-btn-acento:hover { background: var(--color-acentohi); transform: translateY(-2px); }
+/* Sobre foto: blanco sólido, siempre legible */
+.ag-btn-claro { background: #fff; color: var(--color-chalk); }
+.ag-btn-claro:hover { transform: translateY(-2px); }
+.ag-btn-sm { height: 42px; padding: 0 20px; font-size: 0.84rem; }
+.ag-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+/* En el celular los botones bajan un escalón y el tracking se afloja: con
+   0,16em de separación entre letras un texto largo no entra en 360 px. */
+@media (max-width: 767px) {
+  .ag-btn {
+    height: 48px;
+    padding: 0 22px;
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+  }
+  .ag-btn-sm { height: 40px; padding: 0 16px; font-size: 0.8rem; }
+}
+
+/* ── Selector de talle ───────────────────────────────────────────
+   Cuadrado, no pastilla: es lo que usan Nordstrom, DSW y Adidas, y hace
+   que una fila de talles se lea como una tabla y no como una nube de
+   globitos. El talle sin stock no se esconde —se muestra tachado— porque
+   el cliente necesita saber que existe pero no está. */
+.ag-talle {
+  display: grid;
+  place-items: center;
+  min-width: 48px;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  font-family: var(--font-cond);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.ag-talle:hover { border-color: var(--color-chalk); }
+.ag-talle[aria-pressed="true"] {
+  background: var(--color-chalk);
+  border-color: var(--color-chalk);
+  color: #fff;
+}
+.ag-talle:disabled {
+  cursor: not-allowed;
+  color: var(--color-dim);
+  border-color: var(--color-line);
+  background:
+    linear-gradient(to top left,
+      transparent calc(50% - 0.5px), var(--color-line) 50%,
+      transparent calc(50% + 0.5px));
+}
+
+/* ── Muestra de color ────────────────────────────────────────────
+   Un círculo con el color adentro y el anillo afuera: el anillo marca la
+   selección sin taparlo. El borde interior es para que el blanco y los
+   crudos no desaparezcan sobre el papel. */
+.ag-color {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  transition: box-shadow .15s;
+}
+.ag-color[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--color-chalk);
+}
+.ag-color:disabled { cursor: not-allowed; opacity: .45; }
+
+/* ── Chapitas ────────────────────────────────────────────────────
+   La de oferta va en rojo pleno; las demás en tinta sobre papel. Nunca
+   más de dos por foto: tres chapitas tapan la prenda. */
+.ag-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  font-family: var(--font-cond);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.ag-chip-sale  { background: var(--color-sale); color: #fff; }
+.ag-chip-ink   { background: var(--color-chalk); color: #fff; }
+.ag-chip-linea { border: 1px solid var(--color-chalk); color: var(--color-chalk); background: rgba(255,255,255,.9); }
+
+/* Precio anterior, tachado */
+.ag-precio-antes {
+  color: var(--color-dim);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Campos ──────────────────────────────────────────────────────
+   El campo sobre papel es una caja blanca con filete: si se pinta de gris
+   compite con la foto de producto. El foco lo marca la tinta. */
+.ag-input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+  padding-block: 0.85rem;
+  padding-inline: 1rem;
+  transition: border-color .2s;
+}
+.ag-input::placeholder { color: var(--color-dim); }
+.ag-input:focus { outline: none; border-color: var(--color-chalk); }
+
+/* Safari en iPhone hace zoom solo cuando tocás un campo cuya letra mide
+   menos de 16 px, y después la página queda corrida a la derecha. Abajo de
+   768 px todos los campos van a 16 px justos, pase lo que pase arriba. */
+@media (max-width: 767px) {
+  input, select, textarea { font-size: 16px; }
+}
+
+/* ── Desplegables ────────────────────────────────────────────────
+   La lista que se abre al hacer click la dibuja el sistema operativo, no
+   la página. Se pintan a mano para que no dependa del tema del equipo. */
+select option,
+select optgroup {
+  background-color: #ffffff;
+  color: var(--color-chalk);
+}
+select option:disabled { color: var(--color-dim); }
+select option:checked  { background: var(--color-raise); color: var(--color-chalk); }
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-line); }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--color-linehi); }
+
+/* Carrusel horizontal sin barra: se arrastra y se engancha en cada tarjeta. */
+.ag-carrusel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.ag-carrusel::-webkit-scrollbar { display: none; }
+.ag-carrusel > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+/* ── Entrada ─────────────────────────────────────────────────── */
+@keyframes ag-rise { to { opacity: 1; transform: none; } }
+.ag-rise {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: ag-rise .8s cubic-bezier(.2,.7,.25,1) forwards;
+}
+.ag-d1 { animation-delay: .05s }
+.ag-d2 { animation-delay: .14s }
+.ag-d3 { animation-delay: .23s }
+.ag-d4 { animation-delay: .32s }
+.ag-d5 { animation-delay: .44s }
+.ag-d6 { animation-delay: .55s }
+
+@keyframes ag-spin { to { transform: rotate(360deg); } }
+.ag-spin { animation: ag-spin 90s linear infinite; transform-origin: 50% 50%; }
+
+/* Marquesina del anuncio superior */
+@keyframes ag-marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .ag-rise { opacity: 1; transform: none; }
+}
