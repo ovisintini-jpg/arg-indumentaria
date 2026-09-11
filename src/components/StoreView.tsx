@@ -19,10 +19,12 @@ import SectionHead from "@/components/SectionHead";
    categorías  → el catálogo entero, ordenado por persona.
    temporada   → la campaña grande.
    destacados  → producto de verdad, con precio: hasta acá era todo promesa.
+   marcas      → banda salmón con los logos. Golpe de color a mitad de página,
+                 y cada marca lleva a su catálogo.
    guía talles → la que evita la mitad de las devoluciones.
    outlet      → la banda de oferta, para el que baja buscando precio.
    reseñas     → prueba social antes de cerrar.
-   marcas      → qué marcas se venden. Cierra la página.
+   cierre      → la banda de calzado. Cierra la página.
 
    Cuando hay búsqueda activa o una categoría elegida desde el buscador, todo
    esto se reemplaza por el catálogo filtrado. */
@@ -48,11 +50,11 @@ export default function StoreView() {
         <ProductGrid />
       </section>
 
+      <Brands />
       <GuiaTalles />
       <BandaImagen ranura="editorial" />
       <Resenas />
       <BandaImagen ranura="cierre" />
-      <Brands />
     </>
   );
 }
