@@ -83,7 +83,7 @@ export default function Footer() {
             <Brand />
             <p className="mt-4 max-w-[34ch] text-[0.93rem] text-mute">
               Indumentaria y calzado para toda la familia. Temporada, básicos y
-              outlet, con talles reales y cambios sin vueltas.
+              outlet.
             </p>
             <p className="mt-3 max-w-[34ch] text-[0.93rem] text-dim">
               {settings.envios_desc}
@@ -162,8 +162,7 @@ export default function Footer() {
             Botón de arrepentimiento
           </Link>
           <p className="max-w-[46ch] text-[0.82rem] leading-relaxed text-dim">
-            Podés revocar tu compra dentro de los 10 días corridos de recibida la prenda, sin costo
-            y sin explicar por qué. Los gastos de devolución corren por nuestra cuenta.
+            Podés revocar tu compra dentro de los 10 días corridos de recibida la prenda.
           </p>
         </div>
 

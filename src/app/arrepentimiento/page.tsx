@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   // La marca la agrega el `title.template` de app/layout.tsx.
   title: "Botón de arrepentimiento",
   description:
-    "Pedí la revocación de tu compra dentro de los 10 días corridos de recibida la pieza. Sin registro, sin costo y con los gastos de devolución a cargo nuestro, como manda la Ley 24.240.",
+    "Pedí la revocación de tu compra dentro de los 10 días corridos de recibida la pieza. Sin registro, sin costo.",
   robots: { index: true, follow: true },
 };
 
@@ -53,8 +53,8 @@ export default function ArrepentimientoPage() {
           </h1>
           <p className="mt-4 max-w-[62ch] text-[1.02rem] font-light leading-relaxed text-mute">
             Si te arrepentiste de una compra, pedís la revocación acá y listo. No hace falta que
-            expliques por qué, no tenés que crear una cuenta y no te cobramos nada. Es un derecho que
-            te da el artículo 34 de la Ley 24.240 y lo cumplimos como está escrito.
+            expliques por qué, no tenés que crear una cuenta y no te cobramos nada.
+            
           </p>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -100,9 +100,8 @@ export default function ArrepentimientoPage() {
 
               <div className="mt-9 border-l-2 border-acento pl-4">
                 <p className="text-[0.9rem] font-light leading-relaxed text-mute">
-                  La pieza tiene que volver sin instalar y en su embalaje. Si ya está montada en el
-                  auto no entra por acá, pero si falló, seguís cubierto por la garantía: escribinos
-                  igual y lo vemos.
+                  La prenda o calzado no tienen que haber sido usada, ni tener rastros de uso, tiene que tener sus etiquetas y embalaje original.
+                  se puede cambiar por otro talle, o podemos devolver el dinero.
                 </p>
               </div>
 
