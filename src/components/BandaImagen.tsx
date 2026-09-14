@@ -99,7 +99,7 @@ export default function BandaImagen({ ranura }: { ranura: Ranura }) {
   return (
     <section
       aria-label={c.titulo}
-      className="relative w-full overflow-hidden"
+      className="relative flex w-full min-h-[340px] items-center overflow-hidden md:min-h-[400px] lg:min-h-[440px]"
       style={{ background: c.fondo }}
     >
       {foto && (
@@ -127,7 +127,7 @@ export default function BandaImagen({ ranura }: { ranura: Ranura }) {
         />
       )}
 
-      <div className="relative mx-auto flex w-full max-w-[1320px] flex-col items-start gap-5 px-4 py-14 md:px-6 md:py-24 lg:px-14 lg:py-28">
+      <div className="relative mx-auto flex w-full max-w-[1320px] flex-col items-start gap-5 px-4 py-12 md:px-6 md:py-16 lg:px-14 lg:py-20">
         <p
           className="font-cond text-[0.8rem] font-semibold uppercase tracking-[0.24em]"
           style={{ color: sobreFoto ? "rgba(255,255,255,.82)" : c.tinta, opacity: sobreFoto ? 1 : 0.7 }}

@@ -38,14 +38,13 @@ import { Icon } from "@/components/Icons";
 type Marca = { nombre: string; logo: string | null };
 
 const MARCAS: Marca[] = [
-  { nombre: "Nike",        logo: null },
-  { nombre: "Adidas",      logo: null },
-  { nombre: "New Balance", logo: null },
-  { nombre: "Puma",        logo: null },
-  { nombre: "Vans",        logo: null },
-  { nombre: "Converse",    logo: null },
-  { nombre: "Topper",      logo: null },
-  { nombre: "Reebok",      logo: null },
+  { nombre: "Nike",        logo: "/images/marcas/nike.svg" },
+  { nombre: "Adidas",      logo: "/images/marcas/adidas.svg" },
+  { nombre: "New Balance", logo: "/images/marcas/new-balance.svg" },
+  { nombre: "Puma",        logo: "/images/marcas/puma.svg" },
+  { nombre: "Vans",        logo: "/images/marcas/vans.svg" },
+  { nombre: "Converse",    logo: "/images/marcas/converse.svg" },
+  { nombre: "Reebok",      logo: "/images/marcas/reebok.png" },
 ];
 
 /* Salmón: la terracota de la marca, aclarada. La tinta (#14120F) encima da
@@ -101,10 +100,10 @@ export default function Brands() {
     <section
       id="marcas"
       aria-labelledby="marcas-titulo"
-      className="w-full scroll-mt-[124px] md:scroll-mt-24"
+      className="flex w-full min-h-[340px] items-center scroll-mt-[124px] md:min-h-[400px] md:scroll-mt-24 lg:min-h-[440px]"
       style={{ background: FONDO }}
     >
-      <div className="mx-auto grid w-full max-w-[1320px] items-center gap-7 px-4 py-10 md:grid-cols-[minmax(190px,260px)_1fr] md:gap-10 md:px-6 md:py-20 lg:px-14 lg:py-24">
+      <div className="mx-auto grid w-full max-w-[1320px] items-center gap-7 px-4 py-10 md:grid-cols-[minmax(190px,260px)_1fr] md:gap-10 md:px-6 md:py-16 lg:px-14 lg:py-20">
         <div>
           <p className="mb-2 font-cond text-[0.8rem] font-semibold uppercase tracking-[0.24em] text-chalk/80">
             Marcas
@@ -127,10 +126,10 @@ export default function Brands() {
                   type="button"
                   onClick={() => verMarca(m.nombre)}
                   aria-label={`Ver productos ${m.nombre}`}
-                  className="group flex h-24 w-full items-center justify-center px-3 text-chalk md:h-28 md:px-5"
+                  className="group flex h-28 w-full items-center justify-center px-3 text-chalk md:h-32 md:px-5"
                 >
                   {m.logo ? (
-                    <span className="relative block h-12 w-full transition-transform duration-200 group-hover:-translate-y-1 md:h-16">
+                    <span className="relative block h-14 w-full transition-transform duration-200 group-hover:-translate-y-1 md:h-20">
                       <Image
                         src={m.logo}
                         alt=""
