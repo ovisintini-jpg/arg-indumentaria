@@ -26,7 +26,7 @@ import { Icon } from "@/components/Icons";
    encima (clase ag-title-foto + velo).
    ─────────────────────────────────────────────────────────────────────────── */
 
-const FOTO_CAMPANA: string | null = "/images/collagezapas2.jpg";
+const FOTO_CAMPANA: string | null = "/images/collagezapas2.png";
 const FOTO_MUJER:   string | null = "/images/hero-mujer.jpg";
 const FOTO_HOMBRE:  string | null = "/images/hero-hombre.jpg";
 
@@ -73,11 +73,10 @@ export default function Hero() {
             <h1 className="ag-title-foto mt-4 max-w-[14ch] font-display text-[clamp(2.4rem,7vw,4.6rem)] font-black leading-[0.96] tracking-[-0.04em]">
               Vestite bien.
               <br />
-              Pagalo mejor.
+              Pagalo menos.
             </h1>
             <p className="mt-5 max-w-[44ch] text-[1rem] text-white/80">
-              Indumentaria y calzado para toda la familia. Envíos a todo el país,
-              cambios sin cargo y hasta 6 cuotas sin interés.
+              Indumentaria y calzado para toda la familia. Envíos a todo el país.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/categoria/novedades" className="ag-btn ag-btn-claro">
