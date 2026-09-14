@@ -110,7 +110,7 @@ export default function Brands() {
           </p>
           <h2
             id="marcas-titulo"
-            className="max-w-[14ch] font-display text-[clamp(1.6rem,2.8vw,2.3rem)] font-extrabold text-chalk"
+            className="max-w-[14ch] font-display text-[clamp(1.9rem,5vw,3.6rem)] font-extrabold text-chalk"
           >
             Marcas que pisan fuerte
           </h2>
