@@ -26,7 +26,7 @@ import { Icon } from "@/components/Icons";
    encima (clase ag-title-foto + velo).
    ─────────────────────────────────────────────────────────────────────────── */
 
-const FOTO_CAMPANA: string | null = "/images/hero-campana.jpg";
+const FOTO_CAMPANA: string | null = "/images/collagezapas2.jpg";
 const FOTO_MUJER:   string | null = "/images/hero-mujer.jpg";
 const FOTO_HOMBRE:  string | null = "/images/hero-hombre.jpg";
 
