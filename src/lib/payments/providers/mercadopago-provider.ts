@@ -85,9 +85,10 @@ export class MercadoPagoProvider implements PaymentProvider {
   async createCheckoutSession(order: CheckoutOrder): Promise<CheckoutSessionResult> {
     const preference = new Preference(client());
 
-    const notificationUrl = process.env.APP_URL
-      ? `${process.env.APP_URL}/api/webhooks/mercadopago`
-      : undefined;
+    // Sin la barra final: con APP_URL="https://sitio/" quedaba "//api/..." y
+    // Mercado Pago avisaba a una dirección que Vercel no reconoce.
+    const appUrl = process.env.APP_URL?.replace(/\/+$/, "");
+    const notificationUrl = appUrl ? `${appUrl}/api/webhooks/mercadopago` : undefined;
 
     // auto_return exige que back_urls.success sea una URL https pública — en
     // localhost (desarrollo) Mercado Pago rechaza la preferencia si se manda.
