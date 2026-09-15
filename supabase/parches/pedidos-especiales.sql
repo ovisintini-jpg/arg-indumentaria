@@ -182,7 +182,9 @@ SET search_path TO 'public'
 AS $$
   SELECT
     p.id, p.title, p.price, p.envio_costo, p.icon, p.image, p.images,
-    p.category_id, p.subcategory, p.brand, p.oem, p.description, p.detalle,
+    p.category_id, p.subcategory, p.brand,
+    COALESCE(to_jsonb(p)->>'sku', to_jsonb(p)->>'oem') AS oem,
+    p.description, p.detalle,
     p.stock, p.cliente_nombre, p.cliente_email, p.vence_el
   FROM public.products p
   WHERE p.visibilidad = 'privado'
