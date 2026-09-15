@@ -73,10 +73,11 @@ export default function Hero() {
             <h1 className="ag-title-foto mt-4 max-w-[14ch] font-display text-[clamp(2.4rem,7vw,4.6rem)] font-black leading-[0.96] tracking-[-0.04em]">
               Vestite bien.
               <br />
-              Pagalo menos.
+              Pagalo mejor.
             </h1>
             <p className="mt-5 max-w-[44ch] text-[1rem] text-white/80">
-              Indumentaria y calzado para toda la familia. Envíos a todo el país.
+              Indumentaria y calzado para toda la familia. Envíos a todo el país
+              y cambios sin cargo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/categoria/novedades" className="ag-btn ag-btn-claro">

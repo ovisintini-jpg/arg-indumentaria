@@ -24,12 +24,6 @@ import ImageZoomModal from "@/components/ImageZoomModal";
 
 const money = (n: number) => `$${n.toLocaleString("es-AR", { maximumFractionDigits: 0 })}`;
 
-/** Las tres cuotas que se muestran abajo del precio. En Argentina el precio en
- *  cuotas es parte del precio: mostrarlo acá evita la pregunta por WhatsApp. */
-function cuotas(precio: number) {
-  return [3, 6].map((n) => ({ n, monto: Math.round(precio / n) }));
-}
-
 export default function Ficha({
   product,
   rubro,
@@ -240,9 +234,6 @@ export default function Ficha({
               </>
             )}
           </div>
-          <p className="ag-num mt-1.5 text-[0.88rem] text-mute">
-            {cuotas(product.price).map((c) => `${c.n} cuotas de ${money(c.monto)}`).join(" · ")} sin interés
-          </p>
 
           {/* Color */}
           {colores.length > 0 && (

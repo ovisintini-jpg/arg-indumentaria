@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     template: "%s | ARG Indumentaria",
   },
   description:
-    "Indumentaria y calzado para mujer, hombre y chicos. Marcas, temporada y outlet en un solo lugar: remeras, jeans, camperas, vestidos, zapatillas y botas. Envíos a todo el país, cambios sin cargo y hasta 6 cuotas sin interés.",
+    "Indumentaria y calzado para mujer, hombre y chicos. Marcas, temporada y outlet en un solo lugar: remeras, jeans, camperas, vestidos, zapatillas y botas. Envíos a todo el país y cambios sin cargo.",
 
   applicationName: NOMBRE_SITIO,
   authors: [{ name: NOMBRE_SITIO }],

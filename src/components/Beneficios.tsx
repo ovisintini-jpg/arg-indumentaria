@@ -8,7 +8,7 @@ const BENEFICIOS: { icono: IconName; titulo: string; detalle: string }[] = [
   { icono: "truck",  titulo: "Envío gratis desde $120.000", detalle: "A todo el país por Correo Argentino y Andreani." },
   { icono: "cambio", titulo: "Cambios sin cargo",           detalle: "30 días para cambiar el talle. Primer cambio gratis." },
   { icono: "regla",  titulo: "Guía de talles",              detalle: "Las medidas reales de cada prenda, en la ficha." },
-  { icono: "escudo", titulo: "Compra protegida",            detalle: "Pagás con Mercado Pago o tarjeta, en hasta 6 cuotas." },
+  { icono: "escudo", titulo: "Compra protegida",            detalle: "Pagás con Mercado Pago o tarjeta." },
 ];
 
 export default function Beneficios() {

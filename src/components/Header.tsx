@@ -53,7 +53,6 @@ const DEPARTAMENTOS: { label: string; ids: string[]; href: string }[] = [
 
 const ANUNCIOS = [
   "Envío gratis en compras desde $120.000 — a todo el país",
-  "Hasta 6 cuotas sin interés con todas las tarjetas",
   "Cambios sin cargo dentro de los 30 días",
 ];
 
