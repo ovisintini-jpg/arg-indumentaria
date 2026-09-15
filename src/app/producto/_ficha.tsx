@@ -20,6 +20,7 @@ import { useCart, stockDeVariante } from "@/context/CartContext";
 import { useQuote } from "@/context/QuoteContext";
 import { Icon, productIcon } from "@/components/Icons";
 import { BotonFavorito } from "@/components/ProductCard";
+import ImageZoomModal from "@/components/ImageZoomModal";
 
 const money = (n: number) => `$${n.toLocaleString("es-AR", { maximumFractionDigits: 0 })}`;
 
@@ -50,6 +51,7 @@ export default function Ficha({
   const [agregado, setAgregado] = useState(false);
   const [aviso, setAviso] = useState<string | null>(null);
   const [abierto, setAbierto] = useState<string | null>("detalle");
+  const [zoomAbierto, setZoomAbierto] = useState(false);
 
   const hayDetalle = Boolean(product.stock_variantes && Object.keys(product.stock_variantes).length);
 
@@ -161,12 +163,26 @@ export default function Ficha({
           <div className="min-w-0 flex-1">
             <div className="relative aspect-[3/4] w-full overflow-hidden border border-line bg-raise">
               {imagenes.length > 0 ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={imagenes[activa]}
-                  alt={product.title}
-                  className="h-full w-full object-cover"
-                />
+                <button
+                  type="button"
+                  onClick={() => setZoomAbierto(true)}
+                  aria-label="Ver foto completa"
+                  className="group/zoom absolute inset-0 h-full w-full cursor-zoom-in"
+                >
+                  {/* object-contain: la foto entra ENTERA en el recuadro. Antes
+                      iba en object-cover y, en cualquier foto que no fuera
+                      exactamente 3:4, se veía recortada como si tuviera zoom
+                      puesto. El zoom de verdad es este modal, a un click. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={imagenes[activa]}
+                    alt={product.title}
+                    className="h-full w-full object-contain"
+                  />
+                  <span className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 border border-line bg-ink/90 px-2.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-chalk opacity-0 transition-opacity group-hover/zoom:opacity-100">
+                    <Icon name="search" size={13} /> Ampliar
+                  </span>
+                </button>
               ) : (
                 <span className="absolute inset-0 grid place-items-center text-linehi">
                   <Icon name={productIcon(product)} size="38%" />
@@ -382,6 +398,16 @@ export default function Ficha({
           </div>
         </div>
       </div>
+
+      {zoomAbierto && imagenes.length > 0 && (
+        <ImageZoomModal
+          imagenes={imagenes}
+          activa={activa}
+          alt={product.title}
+          onCerrar={() => setZoomAbierto(false)}
+          onCambiar={setActiva}
+        />
+      )}
     </div>
   );
 }
