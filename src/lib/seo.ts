@@ -19,7 +19,7 @@ export const NOMBRE_SITIO = "ARG Indumentaria";
  *  1200 × 630 es la medida que piden todos; más chica se ve borrosa y más
  *  grande la recortan igual. */
 export const OG_IMAGEN = {
-  url: "/images/og-default.jpg",
+  url: "/images/og-indumentaria.jpg",
   width: 1200,
   height: 630,
   alt: "ARG Indumentaria — ropa y calzado para toda la familia",
