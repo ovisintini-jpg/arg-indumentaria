@@ -12,17 +12,21 @@ import { Product } from "@/types";
    · La proporción por defecto es 3:4 (vertical). Es la de la fotografía de
      moda —una persona parada entra; un repuesto, no— y es la que usan
      Nordstrom, Zara, Adidas y prácticamente todo el rubro.
-   · La foto va en `object-cover`, no `contain`: la prenda tiene que llenar la
-     caja. Contain deja aire alrededor y la grilla se ve despareja. */
+   · La foto va en `object-contain`, no `cover`: la prenda tiene que verse
+     ENTERA. Antes iba en `cover` y, en cualquier foto que no calzara justo en
+     3:4, se veía recortada —como si tuviera zoom puesto— y el cliente perdía
+     parte de la prenda antes de entrar a la ficha. */
 export default function ProductThumb({
   product,
   ratio = "3/4",
   className = "",
+  fit = "contain",
   sizes,
 }: {
   product: Product;
   ratio?: string;
   className?: string;
+  fit?: "contain" | "cover";
   sizes?: string;
 }) {
   const foto = product.image ?? product.images?.[0];
@@ -38,7 +42,9 @@ export default function ProductThumb({
           alt={product.title}
           sizes={sizes}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.04] ${
+            fit === "contain" ? "object-contain" : "object-cover"
+          }`}
         />
       ) : (
         <span className="absolute inset-0 grid place-items-center text-linehi">
